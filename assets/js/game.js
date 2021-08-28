@@ -34,7 +34,7 @@ var fight = function(enemyName) {
         );
 
         if (enemyHealth <= 0) { //Check enemy health
-            window.alert(enemyName + "has died!");
+            window.alert(enemyName + " has died!");
 
             playerMoney = playerMoney + 20; //award player for winning
             console.log("playerMoney", playerMoney);
@@ -56,19 +56,45 @@ var fight = function(enemyName) {
     }
 };
 
-          
+       
+var startGame = function() { //function to start a new game
+//RESET PLAYER STATS
+debugger;
+playerHealth = 24;
+playerAttack = 10;
+playerMoney = 10;
+        for(var i = 0; i < enemyNames.length; i++) {
+            if (playerHealth > 0) {
+                
+                window.alert("Welcome to Robot Gladiators! Round " + (i + 1 ));//This is called the first time the for loop is called, and then any time we exit the while loop, which ensures we only see this alert at the beginning of a round// The parens around "i+1" allow that operator to work on its arguments first before becoming a string that can be concatenated with the string before it
+                var pickedEnemyName = enemyNames[i];//pick new enemy to fight
+                enemyHealth = 50;//reset enemy health
+                fight(pickedEnemyName);
+            }
+                else { 
+                    endGame();
+                        //window.alert("You have lost your robot in battle! Game Over!");
+                        //break;
+                    }
+        }
 
-//debugger;
-for(var i = 0; i < enemyNames.length; i++) {
-    if (playerHealth > 0) {
-        window.alert("Welcome to Robot Gladiators! Round " + (i + 1 ));//This is called the first time the for loop is called, and then any time we exit the while loop, which ensures we only see this alert at the beginning of a round// The parens around "i+1" allow that operator to work on its arguments first before becoming a string that can be concatenated with the string before it
+        endGame(); 
+    };
+
+    var endGame = function() {
+        if (playerHealth > 0) {
+            window.alert("Great job, you've survived the game! You now have a score of " + PlayerMoney + ".");
+    } else {
+        window.alert("You've lost your robot in battle.");
     }
-    else { 
-        window.alert("You have lost your robot in battle! Game Over!");
-        break;
+
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) { //restart the game
+        startGame();
+    } else {
+        window.alert("Thank you for playing Robot Gladiators!, Come back soon!");
     }
-    var pickedEnemyName = enemyNames[i];//pick new enemy to fight
-    enemyHealth = 50;//reset enemy health
-    fight(pickedEnemyName);
 }
-
+    
+    startGame();
