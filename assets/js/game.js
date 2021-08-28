@@ -1,5 +1,5 @@
 var playerName = window.prompt("What is your robot's name?");
-var playerHealth = 100;
+var playerHealth = 24;
 var playerAttack = 10;
 var playerMoney = 10;
 
@@ -58,9 +58,17 @@ var fight = function(enemyName) {
 
           
 
-
+//debugger;
 for(var i = 0; i < enemyNames.length; i++) {
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
+    if (playerHealth > 0) {
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1 ));//This is called the first time the for loop is called, and then any time we exit the while loop, which ensures we only see this alert at the beginning of a round// The parens around "i+1" allow that operator to work on its arguments first before becoming a string that can be concatenated with the string before it
+    }
+    else { 
+        window.alert("You have lost your robot in battle! Game Over!");
+        break;
+    }
+    var pickedEnemyName = enemyNames[i];//pick new enemy to fight
+    enemyHealth = 50;//reset enemy health
     fight(pickedEnemyName);
 }
+
